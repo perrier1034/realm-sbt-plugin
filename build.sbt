@@ -1,7 +1,7 @@
 sbtPlugin := true
 
 //Change to your organization
-organization := "your.org"
+organization := "com.github.aafa"
 
 //Change to your plugin name
 name := """realm-sbt-plugin"""

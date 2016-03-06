@@ -1,4 +1,4 @@
-package com.example
+package com.github.aafa
 
 import sbt._
 import sbt.Keys.{ streams, target }
@@ -7,7 +7,7 @@ import java.nio.charset.Charset
 /**
  * This plugin helps you which operating systems are awesome
  */
-object HelloPlugin extends AutoPlugin {
+object RealmPlugin extends AutoPlugin {
 
   /**
    * Defines all settings/tasks that get automatically imported,
@@ -29,7 +29,7 @@ object HelloPlugin extends AutoPlugin {
   def helloSetting: Setting[_] = hello := {
     // Sbt provided logger.
     val log = streams.value.log
-    log.info("Hello task")
+    println("Hello task!")
   }
 
 }

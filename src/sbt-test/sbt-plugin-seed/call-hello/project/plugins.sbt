@@ -1,1 +1,1 @@
-addSbtPlugin("your.org" % "sbt-plugin-seed" % sys.props("project.version"))
+addSbtPlugin("com.github.aafa" % "realm-sbt-plugin" % sys.props("project.version"))
