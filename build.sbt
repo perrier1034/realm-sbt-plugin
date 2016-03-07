@@ -7,13 +7,33 @@ organization := "com.github.aafa"
 name := """realm-sbt-plugin"""
 
 //Change to the version
-version := "1.0-SNAPSHOT"
+version := "0.1.0-SNAPSHOT"
 
 scalaVersion := "2.10.4"
 
 scalacOptions ++= Seq("-deprecation", "-feature")
 
-resolvers += Resolver.sonatypeRepo("snapshots")
+resolvers ++= Seq(
+  Resolver.mavenLocal,
+  DefaultMavenRepository,
+  "jcenter" at "http://jcenter.bintray.com",
+  "oss" at "http://oss.jfrog.org/artifactory/oss-snapshot-local",
+  "ReLinker" at "https://jitpack.io",
+  Resolver.defaultLocal
+)
+
+libraryDependencies ++= Seq(
+  "io.realm" % "realm-gradle-plugin" % "0.87.5",
+  "io.realm" % "realm-transformer" % "0.88.8-SNAPSHOT-LOCAL",
+  "org.codehaus.groovy" % "groovy-all" % "2.4.3",
+  "com.android.tools.build" % "gradle" % "1.5.0",
+  "com.android.tools.build" % "transform-api" % "1.5.0",
+  "org.javassist" % "javassist" % "3.20.0-GA",
+  "org.gradle" % "gradle-core" % "2.0" exclude("org.slf4j", "slf4j-api"),
+  "org.slf4j" % "slf4j-simple" % "1.6.0",
+  "org.slf4j" % "slf4j-api" % "1.6.0"
+)
+
 
 // Change this to another test framework if you prefer
 libraryDependencies += "org.scalatest" %% "scalatest" % "2.2.4" % "test"

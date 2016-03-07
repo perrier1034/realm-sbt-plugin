@@ -1,12 +1,9 @@
 package com.github.aafa
 
+import sbt.Keys._
 import sbt._
-import sbt.Keys.{ streams, target }
-import java.nio.charset.Charset
 
-/**
- * This plugin helps you which operating systems are awesome
- */
+
 object RealmPlugin extends AutoPlugin {
 
   /**
@@ -14,7 +11,9 @@ object RealmPlugin extends AutoPlugin {
    * when the plugin is enabled
    */
   object autoImport {
-    val hello = inputKey[Unit]("Prints Hello")
+    lazy val settings = Seq(
+      (packageBin in Compile) <<= (packageBin in Compile) dependsOn RealmProcessing.realmTransformer
+    ) ++ RealmProcessing.tasks
   }
 
   import autoImport._
@@ -22,14 +21,7 @@ object RealmPlugin extends AutoPlugin {
   /**
    * Provide default settings
    */
-  override def projectSettings: Seq[Setting[_]] = Seq(
-    helloSetting
-  )
+  override def projectSettings: Seq[Setting[_]] = settings
 
-  def helloSetting: Setting[_] = hello := {
-    // Sbt provided logger.
-    val log = streams.value.log
-    println("Hello task!")
-  }
 
 }
