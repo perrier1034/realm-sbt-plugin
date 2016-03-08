@@ -26,10 +26,12 @@ object RealmProcessing {
       val classes: Stream[File] = getFileTree(classDir).filter(_.name.endsWith(".class"))
       val className: (File) => String = _.getAbsolutePath.replace(classDir.absolutePath + "/", "").replace(".class", "").replace("/", ".")
       val internalClass: (String) => Boolean = _.contains("$")
-      val filesList: String = classes.map(className).filterNot(internalClass) mkString " "
+      val realmArtifacts: (String) => Boolean = _.contains("io.realm") // that was previously created
+      val filesList: String = classes.map(className).filterNot(internalClass).filterNot(realmArtifacts) mkString " "
 
       val command = s"javac -source 1.7 -target 1.7 -classpath $classpath -processor io.realm.processor.RealmProcessor -XprintRounds -d $classDir $filesList"
-      Process(command) !
+      val result: Int = Process(command).!
+      assert(result == 0, "`javac -processor` should be successful")
     },
 
     realmTransformer <<= Def.task {

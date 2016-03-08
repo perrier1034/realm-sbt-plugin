@@ -1,4 +1,5 @@
 # test realm processing
+> clean
 > realm-transform
 $ exists target/android/intermediates/classes/io/realm/UserRealmProxy.class
 $ exists target/android/intermediates/classes/io/realm/UserRealmProxyInterface.class
