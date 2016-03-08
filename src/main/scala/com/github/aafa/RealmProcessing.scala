@@ -7,30 +7,32 @@ import com.android.build.api.transform.QualifiedContent.ContentType
 import com.android.build.api.transform._
 import io.realm.transformer.RealmTransformer
 import org.gradle.api.logging.LoggingManager
+import org.gradle.logging.internal.DefaultLoggingManager
 import sbt.Keys._
 import sbt._
 import scala.collection.JavaConverters._
 
 import scala.language.postfixOps
 
-object RealmProcessing{
-  lazy val realmProcessAnnotations: TaskKey[Unit] = TaskKey[Unit]("realm-annotations", "realm test")
-  lazy val realmTransformer: TaskKey[Unit] = TaskKey[Unit]("realm-trans", "realm trans")
+object RealmProcessing {
+  lazy val realmProcessAnnotations: TaskKey[Unit] = TaskKey[Unit]("realm-annotations", "realm annotations")
+  lazy val realmTransformer: TaskKey[Unit] = TaskKey[Unit]("realm-transform", "realm transform")
 
   val tasks = Seq(
     realmProcessAnnotations <<= Def.task {
       val classDir = (classDirectory in Compile).value
       val classpath = ((products in Compile).value ++ (bootClasspath in Android).value.files ++ (dependencyClasspath in Compile).value.files) mkString ":"
 
-      val dtos: Stream[File] = getFileTree(classDir).filter(_.name.endsWith("User.class"))
-      val filesList: String = dtos.foldLeft("")((s: String, file: File) => s + " " + file.getAbsolutePath.replace(".class", ""))
+      val classes: Stream[File] = getFileTree(classDir).filter(_.name.endsWith(".class"))
+      val className: (File) => String = _.getAbsolutePath.replace(classDir.absolutePath + "/", "").replace(".class", "").replace("/", ".")
+      val internalClass: (String) => Boolean = _.contains("$")
+      val filesList: String = classes.map(className).filterNot(internalClass) mkString " "
 
-      val command = s"javac -source 1.7 -target 1.7 -classpath $classpath -processor io.realm.processor.RealmProcessor -XprintRounds -d $classDir com.github.aafa.model.User"
+      val command = s"javac -source 1.7 -target 1.7 -classpath $classpath -processor io.realm.processor.RealmProcessor -XprintRounds -d $classDir $filesList"
       Process(command) !
 
-      //      println("! doing command " + command)
-      //      println("! dtos " + dtos)
-      //      println("proguardOptions in Android are " + (proguardOptions in Android).value)
+//      println("! doing command " + command)
+//      println("! classes " + classes)
     },
 
     realmTransformer <<= Def.task {
@@ -41,7 +43,7 @@ object RealmProcessing{
       val classes = transformFiles(dirs = Seq(classDir))
       val references = transformFiles(files = (dependencyClasspath in Compile).value.files)
 
-      transformer.transform(new EmptyContext, classes, references, output, false)
+      transformer.transform(new UndefinedContext, classes, references, output, false)
     } dependsOn realmProcessAnnotations
   )
 
@@ -49,7 +51,7 @@ object RealmProcessing{
     new util.ArrayList[TransformInput](util.Arrays.asList(new Jars(files, dirs)))
   }
 
-  class Jars(files: Seq[File], dirs: Seq[File] = Seq()) extends TransformInput{
+  class Jars(files: Seq[File], dirs: Seq[File] = Seq()) extends TransformInput {
     override def getJarInputs: util.Collection[JarInput] = {
       def jar(f: File) = {
         new JarWrapper(f)
@@ -71,7 +73,7 @@ object RealmProcessing{
     }
   }
 
-  class JarWrapper(f: File) extends JarInput{
+  class JarWrapper(f: File) extends JarInput {
     override def getStatus: Status = Status.ADDED
 
     override def getName: String = f.getAbsolutePath
@@ -83,7 +85,7 @@ object RealmProcessing{
     override def getFile: File = f
   }
 
-  class DirectoryInputWrapper(f: File) extends DirectoryInput{
+  class DirectoryInputWrapper(f: File) extends DirectoryInput {
     override def getChangedFiles: util.Map[File, Status] = {
       println("! getChangedFiles")
       val map: util.HashMap[File, Status] = new util.HashMap()
@@ -104,13 +106,14 @@ object RealmProcessing{
     override def deleteAll(): Unit = {
       println("TransformOutput deleteAll")
     }
+
     override def getContentLocation(s: String, set: util.Set[ContentType], set1: util.Set[QualifiedContent.Scope], format: Format): File = {
       println(s"TransformOutput $s; format $format")
       f
     }
   }
 
-  class EmptyContext extends com.android.build.api.transform.Context{
+  class UndefinedContext extends com.android.build.api.transform.Context {
     override def getTemporaryDir: File = ???
 
     override def getLogging: LoggingManager = ???
