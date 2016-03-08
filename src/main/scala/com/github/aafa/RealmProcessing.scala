@@ -30,9 +30,6 @@ object RealmProcessing {
 
       val command = s"javac -source 1.7 -target 1.7 -classpath $classpath -processor io.realm.processor.RealmProcessor -XprintRounds -d $classDir $filesList"
       Process(command) !
-
-//      println("! doing command " + command)
-//      println("! classes " + classes)
     },
 
     realmTransformer <<= Def.task {

@@ -1,2 +1,8 @@
 # test realm processing
 > realm-transform
+$ exists target/android/intermediates/classes/io/realm/UserRealmProxy.class
+$ exists target/android/intermediates/classes/io/realm/UserRealmProxyInterface.class
+$ exists target/android/intermediates/classes/io/realm/DefaultRealmModule.class
+$ exists target/android/intermediates/classes/io/realm/DefaultRealmModuleMediator.class
+
+# todo test if gradle transform was successful
