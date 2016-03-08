@@ -23,13 +23,12 @@ resolvers ++= Seq(
 )
 
 libraryDependencies ++= Seq(
-  "io.realm" % "realm-gradle-plugin" % "0.87.5",
   "io.realm" % "realm-transformer" % "0.88.8-SNAPSHOT-LOCAL",
   "org.codehaus.groovy" % "groovy-all" % "2.4.3",
   "com.android.tools.build" % "gradle" % "1.5.0",
   "com.android.tools.build" % "transform-api" % "1.5.0",
   "org.javassist" % "javassist" % "3.20.0-GA",
-  "org.gradle" % "gradle-core" % "2.0" exclude("org.slf4j", "slf4j-api"),
+  "org.gradle" % "gradle-core" % "2.0",
   "org.slf4j" % "slf4j-simple" % "1.6.0",
   "org.slf4j" % "slf4j-api" % "1.6.0"
 )
