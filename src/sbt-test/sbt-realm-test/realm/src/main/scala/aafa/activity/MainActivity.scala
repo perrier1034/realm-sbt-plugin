@@ -1,11 +1,9 @@
-package com.github.aafa.activity
+package aafa.activity
 
-
-import com.github.aafa.api.UiService
 import android.content.{Intent, Context}
 import android.view.View
 import android.widget.{TextView, ProgressBar, LinearLayout}
-import com.github.aafa.model.User
+import aafa.model.User
 import io.realm._
 import io.realm.RealmConfiguration.Builder
 import android.app.Activity
@@ -16,7 +14,7 @@ import android.os.Bundle
   * Created by aafa
   */
 
-class MainActivity extends Activity with MainActivityView {
+class MainActivity extends Activity {
 
   def realmConfiguration: RealmConfiguration = new Builder(this)
     .deleteRealmIfMigrationNeeded()
@@ -41,7 +39,6 @@ class MainActivity extends Activity with MainActivityView {
     realm.commitTransaction()
 
     val realmUser: User = realm.where(classOf[User]).equalTo("id", new Integer(2)).findFirst()
-    updateText(realmUser.name)
     println(realmUser.name)
   }
 

@@ -1,4 +1,4 @@
-package com.github.aafa.model
+package aafa.model
 
 import io.realm.RealmObject
 import io.realm.annotations.PrimaryKey
