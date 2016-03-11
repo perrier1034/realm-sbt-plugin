@@ -18,12 +18,13 @@ resolvers ++= Seq(
   DefaultMavenRepository,
   "jcenter" at "http://jcenter.bintray.com",
   "oss" at "http://oss.jfrog.org/artifactory/oss-snapshot-local",
+  "aafa" at "https://dl.bintray.com/aafa/maven",
   "ReLinker" at "https://jitpack.io",
   Resolver.defaultLocal
 )
 
 libraryDependencies ++= Seq(
-  "io.realm" % "realm-transformer" % "0.88.8-SNAPSHOT-LOCAL",
+  "io.realm" % "realm-transformer" % "0.88.0-SBT",
   "org.codehaus.groovy" % "groovy-all" % "2.4.3",
   "com.android.tools.build" % "gradle" % "1.5.0",
   "com.android.tools.build" % "transform-api" % "1.5.0",
@@ -32,7 +33,6 @@ libraryDependencies ++= Seq(
   "org.slf4j" % "slf4j-simple" % "1.6.0",
   "org.slf4j" % "slf4j-api" % "1.6.0"
 )
-
 
 // Change this to another test framework if you prefer
 libraryDependencies += "org.scalatest" %% "scalatest" % "2.2.4" % "test"
