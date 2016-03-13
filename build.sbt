@@ -7,7 +7,7 @@ organization := "com.github.aafa"
 name := """realm-sbt-plugin"""
 
 //Change to the version
-version := "0.2.0-SNAPSHOT"
+version := "0.1.1-SNAPSHOT"
 
 scalaVersion := "2.10.4"
 
