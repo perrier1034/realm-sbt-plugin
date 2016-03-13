@@ -1,6 +1,6 @@
 # SBT plugin for Realm.io 
 
-This plugin will alow you to work with Realm DB for Android from your scala code running with (android-sdk-plugin)[https://github.com/pfn/android-sdk-plugin]
+This plugin will alow you to work with Realm DB for Android from your scala code running with [android-sdk-plugin](https://github.com/pfn/android-sdk-plugin)
 
 ###WIP
 
@@ -29,4 +29,4 @@ class User extends RealmObject{
 }
 ```
 
-See example project [src/sbt-test/sbt-realm-test/realm]
+See example [project](src/sbt-test/sbt-realm-test/realm)
