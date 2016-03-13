@@ -5,23 +5,12 @@ import sbt._
 
 
 object RealmPlugin extends AutoPlugin {
+  override def trigger = allRequirements
+  override def requires = android.AndroidPlugin
 
-  /**
-   * Defines all settings/tasks that get automatically imported,
-   * when the plugin is enabled
-   */
-  object autoImport {
-    lazy val settings = Seq(
-      (packageBin in Compile) <<= (packageBin in Compile) dependsOn RealmProcessing.realmTransformer
-    ) ++ RealmProcessing.tasks
-  }
+  override def projectSettings: Seq[Setting[_]] = RealmProcessing.tasks ++ realmSettings
 
-  import autoImport._
-
-  /**
-   * Provide default settings
-   */
-  override def projectSettings: Seq[Setting[_]] = settings
-
-
+  val realmSettings = Seq(
+    (packageBin in Compile) <<= (packageBin in Compile) dependsOn RealmProcessing.realmTransformer
+  )
 }
