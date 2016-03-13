@@ -22,11 +22,13 @@ Project(id = "app", base = file(".")).enablePlugins(RealmPlugin)
 
 ## Usage
 
+Add a model class
 ```
 class User extends RealmObject{
   @PrimaryKey var id: Long = 1
   var name: String = "test"
 }
 ```
+And other Realm stuff and do `android:run`
 
 See example [project](src/sbt-test/sbt-realm-test/realm)
