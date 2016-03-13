@@ -8,7 +8,7 @@ This plugin will alow you to work with [Realm DB](https://realm.io/) for Android
 Add sbt plugin to your build configuration (i.e. `plugins.sbt`)
 ```
 resolvers += Resolver.url("aafa-sbt", url("http://dl.bintray.com/aafa/sbt-plugins"))(Resolver.ivyStylePatterns)
-addSbtPlugin("com.github.aafa" % "realm-sbt-plugin" % "0.1.0")
+addSbtPlugin("com.github.aafa" % "realm-sbt-plugin" % "0.1.1")
 ```
 
 Then make sure you have enabled it for your project
