@@ -14,13 +14,9 @@ scalaVersion := "2.10.4"
 scalacOptions ++= Seq("-deprecation", "-feature")
 
 resolvers ++= Seq(
-  Resolver.mavenLocal,
-  DefaultMavenRepository,
   "jcenter" at "http://jcenter.bintray.com",
   "oss" at "http://oss.jfrog.org/artifactory/oss-snapshot-local",
-  "aafa" at "https://dl.bintray.com/aafa/maven",
-  "ReLinker" at "https://jitpack.io",
-  Resolver.defaultLocal
+  "aafa" at "https://dl.bintray.com/aafa/maven"
 )
 
 libraryDependencies ++= Seq(

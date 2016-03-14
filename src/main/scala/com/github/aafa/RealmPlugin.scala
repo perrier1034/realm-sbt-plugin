@@ -6,6 +6,7 @@ import sbt._
 
 object RealmPlugin extends AutoPlugin {
   override def trigger = allRequirements
+
   override def requires = android.AndroidPlugin
 
   override def projectSettings: Seq[Setting[_]] = RealmProcessing.tasks ++ realmBuildSettings ++ realmDependency
@@ -16,7 +17,15 @@ object RealmPlugin extends AutoPlugin {
 
   // keep it here up until 0.88 is released
   val realmDependency = Seq(
-    resolvers += "oss" at "http://oss.jfrog.org/artifactory/oss-snapshot-local",
-    libraryDependencies += "io.realm" % "realm-android" % "0.88.0-SNAPSHOT"
+    resolvers ++= Seq(
+      "ReLinker" at "https://jitpack.io",
+      "oss" at "http://oss.jfrog.org/artifactory/oss-snapshot-local"
+    ),
+
+    libraryDependencies ++= Seq(
+      "io.realm" % "realm-android" % "0.88.0-SNAPSHOT",
+      "com.github.KeepSafe" % "ReLinker" % "1.1"
+    )
+
   )
 }
