@@ -85,12 +85,7 @@ object RealmProcessing {
   }
 
   class DirectoryInputWrapper(f: File) extends DirectoryInput {
-    override def getChangedFiles: util.Map[File, Status] = {
-      println("! getChangedFiles")
-      val map: util.HashMap[File, Status] = new util.HashMap()
-      map.put(file("/Users/aafa/Projects/sandbox/realm-test/target/android/intermediates/classes/com/github/aafa/activity/MainActivity.class"), Status.NOTCHANGED)
-      map
-    }
+    override def getChangedFiles: util.Map[File, Status] = new util.HashMap
 
     override def getName: String = f.getName
 
@@ -103,7 +98,6 @@ object RealmProcessing {
 
   class TransformOutput(f: File) extends TransformOutputProvider {
     override def deleteAll(): Unit = {
-      println("TransformOutput deleteAll")
     }
 
     override def getContentLocation(s: String, set: util.Set[ContentType], set1: util.Set[QualifiedContent.Scope], format: Format): File = {
