@@ -2,8 +2,8 @@ import android.content.Context
 import android.support.test.InstrumentationRegistry
 import android.test.RenamingDelegatingContext
 import com.github.aafa.model.User
-import io.realm.{Realm, RealmConfiguration}
 import io.realm.RealmConfiguration.Builder
+import io.realm.{Realm, RealmConfiguration}
 import org.junit.Before
 
 /**
@@ -22,8 +22,12 @@ abstract class AbstractRealmTestCase {
   }
 
   def clearData: Unit = {
+    realmTransaction(_.clear(classOf[User]))
+  }
+
+  def realmTransaction(action: Realm => Unit) = {
     realm.beginTransaction()
-    realm.clear(classOf[User])
+    action(realm)
     realm.commitTransaction()
   }
 }

@@ -1,11 +1,6 @@
-import android.content.Context
-import android.support.test.InstrumentationRegistry
 import android.support.test.runner.AndroidJUnit4
-import android.test.RenamingDelegatingContext
 import com.github.aafa.model.User
-import io.realm.{Realm, RealmConfiguration}
-import io.realm.RealmConfiguration.Builder
-import org.junit.{Test, Before}
+import org.junit.Test
 import org.junit.runner.RunWith
 
 /**
@@ -19,11 +14,8 @@ class RealmTestCase extends AbstractRealmTestCase{
     val user: User = new User
     user.id = 10
     user.name = "demo"
-    assert(user.name == "demo")
 
-    realm.beginTransaction()
-    realm.copyToRealm(user)
-    realm.commitTransaction()
+    realmTransaction(_.copyToRealm(user))
 
     val realmUser: User = realm.where(classOf[User]).equalTo("id", new Integer(10)).findFirst()
     assert(realmUser.name == "demo")
