@@ -30,4 +30,4 @@ class User extends RealmObject{
 ```
 And other Realm stuff and do `android:run`
 
-See example [project](src/sbt-test/sbt-realm-test/realm)
+See example [project](realm-android)
