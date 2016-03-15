@@ -18,10 +18,17 @@ class RealmTestCase {
   @Before
   def setup() = {
     mMockContext = new RenamingDelegatingContext(InstrumentationRegistry.getInstrumentation.getTargetContext, "test_")
+    clearData
   }
 
-  lazy val realmConfiguration: RealmConfiguration = new Builder(mMockContext).build()
+  lazy val realmConfiguration: RealmConfiguration = new Builder(mMockContext).deleteRealmIfMigrationNeeded().build()
   lazy val realm: Realm = Realm.getInstance(realmConfiguration)
+
+  def clearData: Unit = {
+    realm.beginTransaction()
+    realm.clear(classOf[User])
+    realm.commitTransaction()
+  }
 
   @Test
   def test() = {
