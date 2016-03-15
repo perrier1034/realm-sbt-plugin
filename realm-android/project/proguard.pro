@@ -27,3 +27,6 @@
 -keep class android.support.test.runner.AndroidJUnitRunner
 -keep public class * extends junit.framework.TestCase
 -keepclassmembers class * extends junit.framework.TestCase { *; }
+#-keep class android.test.**
+#-keep class android.support.test.** { *; }
+#-keepclasseswithmembers class * { @org.junit.Test <methods>; }
