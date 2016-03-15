@@ -4,4 +4,4 @@ project/project/
 target/
 .idea
 .sbtserver
-
+*.log
