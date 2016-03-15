@@ -4,7 +4,7 @@ This demo project is provided to demonstrate how to work with Realm
 
 ### Requirements
 - Android sdk 23 installed
-- device\emu with api >21
+- device\emu with api >= 21
 
 ### Key points
 
