@@ -6,9 +6,6 @@ import sbt._
 
 object Build extends android.AutoBuild {
 
-  // shortcuts
-  lazy val p = TaskKey[Unit]("p", "protify shortcut")
-
   lazy val app = {
     Project(id = "app", base = file(".")).settings(appsSettings ++ Dependencies.libs: _*).enablePlugins(RealmPlugin, android.protify.Plugin)
   }
@@ -29,8 +26,6 @@ object Build extends android.AutoBuild {
 
     run <<= run in Android,
     test <<= test in Android,
-    install <<= install in Android,
-    packageDebug <<= (packageDebug in Android),
 
     javacOptions in Compile ++= Seq("-source", "1.7", "-target", "1.7", "-Xlint:unchecked", "-Xlint:deprecation"),
     javaOptions in Android := Seq("-Xmx2G -XX:MaxPermSize=702M -XX:ReservedCodeCacheSize=256 -XX:+CMSClassUnloadingEnabled -XX:+UseCodeCacheFlushing"),
