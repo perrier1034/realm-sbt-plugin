@@ -12,26 +12,10 @@ import org.junit.runner.RunWith
   * Created by Alexey Afanasev on 25.02.16.
   */
 @RunWith(classOf[AndroidJUnit4])
-class RealmTestCase {
-  var mMockContext: Context = null
-
-  @Before
-  def setup() = {
-    mMockContext = new RenamingDelegatingContext(InstrumentationRegistry.getInstrumentation.getTargetContext, "test_")
-    clearData
-  }
-
-  lazy val realmConfiguration: RealmConfiguration = new Builder(mMockContext).deleteRealmIfMigrationNeeded().build()
-  lazy val realm: Realm = Realm.getInstance(realmConfiguration)
-
-  def clearData: Unit = {
-    realm.beginTransaction()
-    realm.clear(classOf[User])
-    realm.commitTransaction()
-  }
+class RealmTestCase extends AbstractRealmTestCase{
 
   @Test
-  def test() = {
+  def createUser() = {
     val user: User = new User
     user.id = 10
     user.name = "demo"
