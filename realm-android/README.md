@@ -1,19 +1,22 @@
 ## Realm-test project
 
-This demo project is provided to demonstrate how to work with Realm
+This demo project is provided to demonstrate how to work with Realm from scala
 
 ### Requirements
 - Android sdk 23 installed
 - device\emu with api >= 21
 
-### Key points
-
-- [MainActivity](src/main/scala/com/github/aafa/activity/MainActivity.scala)
-- [Instrumental tests](src/androidTest/scala)
-
-
 ### Run
-`$ sbt run`
+Make sure you have emu\device connected and running then do
+```
+$ sbt run
+```
+Realm plugin will take care of processing every file that is realm-related.
 
 ### Instrumental tests
-`$ sbt test`
+To run [Instrumental tests](src/androidTest/scala) simply do
+
+```
+$ sbt test
+```
+
