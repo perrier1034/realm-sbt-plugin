@@ -6,7 +6,7 @@ This plugin will let you work with [Realm DB](https://realm.io/) for Android fro
 ## Install 
 Add sbt plugin to your build configuration (i.e. `plugins.sbt`)
 ```
-addSbtPlugin("com.github.aafa" % "realm-sbt-plugin" % "0.1.1")
+addSbtPlugin("com.github.aafa" % "realm-sbt-plugin" % "0.1.2")
 ```
 
 Then make sure you have enabled it for your project
