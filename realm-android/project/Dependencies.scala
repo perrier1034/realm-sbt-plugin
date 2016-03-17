@@ -14,7 +14,8 @@ object Dependencies {
     resolvers ++= resolverUrls,
 
     libraryDependencies ++= Seq(
-      "org.macroid" %% "macroid" % "2.0.0-M4"
+      "org.macroid" %% "macroid" % "2.0.0-M4",
+      "com.github.aafa" %% "realm-scala" % "0.1.0-SNAPSHOT"
     ),
 
     // unit tests
