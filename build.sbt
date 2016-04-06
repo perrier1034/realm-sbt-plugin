@@ -20,7 +20,7 @@ resolvers ++= Seq(
 )
 
 libraryDependencies ++= Seq(
-  "io.realm" % "realm-transformer" % "0.88.0-SBT",
+  "io.realm" % "realm-transformer" % "0.88.0",
   "org.codehaus.groovy" % "groovy-all" % "2.4.3",
   "com.android.tools.build" % "gradle" % "1.5.0",
   "com.android.tools.build" % "transform-api" % "1.5.0",
